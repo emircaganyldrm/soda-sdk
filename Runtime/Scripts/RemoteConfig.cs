@@ -51,7 +51,6 @@ namespace Soda.Runtime
         
         private void LoadOverrideConfig()
         {
-#if UNITY_EDITOR
             SodaSDKSettingsSO settings = Resources.Load<SodaSDKSettingsSO>("SodaSettings");
             if (settings.overrideConfig )
             {
@@ -62,7 +61,6 @@ namespace Soda.Runtime
             {
                 ApplyOverrideConfig();
             }
-#endif
         }
         
         private void ApplyOverrideConfig()
@@ -117,8 +115,7 @@ namespace Soda.Runtime
                 {
                     SodaLogger.LogWarning("[RemoteConfig] Failed to fetch config, using cached/default values");
                     ApplyOverrideConfig();
-                    OnError?.Invoke("Failed to fetch remote config");
-                    callback?.Invoke(false);
+                    callback?.Invoke(true);
                 }
             });
         }

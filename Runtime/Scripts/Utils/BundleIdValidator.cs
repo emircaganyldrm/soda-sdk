@@ -31,9 +31,6 @@ namespace Soda.Runtime.Utils
 
             if (!bundleId.Contains("."))
                 return false;
-
-            if (!bundleId.Contains("."))
-                return false;
                 
             return BUNDLE_ID_PATTERN.IsMatch(bundleId);
         }
