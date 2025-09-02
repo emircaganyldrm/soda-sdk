@@ -44,9 +44,9 @@ namespace Soda.Runtime
 #if UNITY_EDITOR
             _platform = new EditorPlatform();
 #elif UNITY_ANDROID
-            platform = new AndroidPlatform(SystemInfo.deviceUniqueIdentifier, Application.version);
+            _platform = new AndroidPlatform(SystemInfo.deviceUniqueIdentifier, Application.version);
 #else
-            platform = new EditorPlatform();
+            _platform = new EditorPlatform();
 #endif
             
             _isInitialized = true;

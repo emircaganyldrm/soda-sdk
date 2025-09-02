@@ -11,20 +11,20 @@ namespace Soda.Runtime.Platform
     /// </summary>
     public class AndroidPlatform : IConfigPlatform
     {
-        private AndroidJavaObject configFetcher;
+        private AndroidJavaObject _configFetcher;
 
-        private string deviceId;
-        private string buildVersion;
+        private string _deviceId;
+        private string _buildVersion;
         
         public AndroidPlatform(string deviceId, string buildVersion)
         {
 #if UNITY_ANDROID && !UNITY_EDITOR
-            this.deviceId = deviceId;
-            this.buildVersion = buildVersion;
+            this._deviceId = _deviceId;
+            this._buildVersion = _buildVersion;
 
             try
             {
-                configFetcher = new AndroidJavaObject("com.emircagan.sodasdk.SodaConfigFetcher");
+                _configFetcher = new AndroidJavaObject("com.emircagan.sodasdk.SodaConfigFetcher");
                 SodaLogger.Log("[AndroidPlatform] Native fetcher initialized");
             }
             catch (Exception e)
@@ -40,13 +40,13 @@ namespace Soda.Runtime.Platform
         public void FetchConfig(string bundleId, string serverUrl, string configName, Action<bool, string> callback)
         {
 #if UNITY_ANDROID && !UNITY_EDITOR
-            if (configFetcher != null)
+            if (_configFetcher != null)
             {
                 try
                 {
                     SodaLogger.Log($"[AndroidPlatform] Fetching config: {bundleId}/{configName}");
                     
-                    string result = configFetcher.Call<string>("SodaGetConfig", bundleId, serverUrl, configName, deviceId, buildVersion);
+                    string result = _configFetcher.Call<string>("SodaGetConfig", bundleId, serverUrl, configName, _deviceId, _buildVersion);
                     
                     if (!string.IsNullOrEmpty(result) && result != "{}")
                     {
