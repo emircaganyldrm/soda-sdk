@@ -6,8 +6,6 @@
   "unity": "2021.3",
   "unityRelease": "0f1",
   "documentationUrl": "https://github.com/emircagan/soda-sdk",
-  "changelogUrl": "https://github.com/emircagan/soda-sdk",
-  "licensesUrl": "https://github.com/emircagan/soda-sdk",
   "keywords": [
     "remote-config",
     "configuration",
