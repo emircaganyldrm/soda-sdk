@@ -64,7 +64,7 @@ namespace Soda.Runtime
             PlayerSettings.Android.minSdkVersion = AndroidSdkVersions.AndroidApiLevel24;
             PlayerSettings.insecureHttpOption = InsecureHttpOption.AlwaysAllowed;
 #endif
-            
+
             RemoteConfig.Initialize(BundleId, ServerUrl,settings.defaultConfigName, initalized =>
             {
                 if (initalized)

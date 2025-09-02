@@ -27,8 +27,16 @@ namespace Soda.EditorTools
 
         private void LoadSettings()
         {
-            settings = Resources.Load<SodaSDKSettingsSO>("SodaSettings");
-            overrideConfig = Resources.Load<SodaOverrideConfigSO>("Override Config");
+            if (settings == null)
+            {
+                settings = Resources.Load<SodaSDKSettingsSO>("SodaSettings");
+            }
+
+            if (overrideConfig == null)
+            {
+                overrideConfig = Resources.Load<SodaOverrideConfigSO>("Override Config");
+                settings.overrideConfig = overrideConfig;
+            }
         }
 
         private void OnGUI()
@@ -119,11 +127,14 @@ namespace Soda.EditorTools
                     new GUIContent("Default Config Name"));
                 EditorGUILayout.PropertyField(serializedSettings.FindProperty("enableLog"),
                     new GUIContent("Enable Logging"));
+                EditorGUILayout.PropertyField(serializedSettings.FindProperty("overrideConfig"),
+                    new GUIContent("Current Override"));
 
                 if (EditorGUI.EndChangeCheck())
                 {
                     serializedSettings.ApplyModifiedProperties();
                     EditorUtility.SetDirty(settings);
+                    overrideConfig =  settings.overrideConfig;
                 }
 
                 EditorGUILayout.Space(5);
@@ -182,7 +193,7 @@ namespace Soda.EditorTools
             else
             {
                 EditorGUILayout.LabelField($"Override Entries: {overrideConfig.overrides.Count}");
-                EditorGUILayout.LabelField($"Overrides Enabled: {(overrideConfig.enableOverrides ? "✅ Yes" : "❌ No")}");
+                EditorGUILayout.LabelField($"Overrides Enabled: {(overrideConfig.enableOverrides ? " Yes" : "No")}");
 
                 if (overrideConfig.enableOverrides)
                 {
@@ -226,6 +237,8 @@ namespace Soda.EditorTools
             AssetDatabase.SaveAssets();
 
             overrideConfig = newOverrideConfig;
+            settings.overrideConfig = overrideConfig;
+            EditorUtility.SetDirty(settings);
 
             EditorGUIUtility.PingObject(newOverrideConfig);
             Selection.activeObject = newOverrideConfig;
@@ -286,7 +299,6 @@ namespace Soda.EditorTools
                 "Check Console for results. Open Config Monitor to see live data.",
                 "OK");
 
-            // Trigger a config fetch
             SodaSDK.RemoteConfig.FetchConfig("default", success =>
             {
                 string message = success ? "Connection successful!" : "Connection failed!";

@@ -24,13 +24,6 @@ namespace Soda.Runtime
         
         public void Initialize(string bundleId, string serverUrl, string configName, Action<bool> callback = null)
         {
-            if (_isInitialized)
-            {
-                SodaLogger.LogWarning("[RemoteConfig] Already initialized");
-                callback?.Invoke(false);
-                return;
-            }
-            
             if (string.IsNullOrEmpty(bundleId))
             {
                 SodaLogger.LogError("[RemoteConfig] Bundle ID cannot be empty");
@@ -59,12 +52,15 @@ namespace Soda.Runtime
         private void LoadOverrideConfig()
         {
 #if UNITY_EDITOR
-            _overrideConfig = Resources.Load<SodaOverrideConfigSO>("Override Config");
+            SodaSDKSettingsSO settings = Resources.Load<SodaSDKSettingsSO>("SodaSettings");
+            if (settings.overrideConfig )
+            {
+                _overrideConfig = settings.overrideConfig;
+            }
 
             if (_overrideConfig != null)
             {
                 ApplyOverrideConfig();
-                SodaLogger.Log($"[RemoteConfig] Loaded override config: {_overrideConfig.name}");
             }
 #endif
         }

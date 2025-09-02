@@ -14,5 +14,7 @@ namespace Soda.Runtime
         
         [Header("Debug")]
         public bool enableLog = true;
+        
+        public SodaOverrideConfigSO overrideConfig;
     }
 }
