@@ -29,7 +29,6 @@ namespace Soda.Runtime
         public void FetchConfig(string bundleId, string serverUrl, string configName, Action<bool, string> callback)
         {
 #if UNITY_EDITOR
-            PlayerSettings.insecureHttpOption = InsecureHttpOption.AlwaysAllowed;
             if (!IsNetworkAvailable())
             {
                 SodaLogger.LogWarning("[EditorPlatform] Network not available");

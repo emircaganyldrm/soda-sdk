@@ -1,5 +1,6 @@
 using System;
 using Soda.Runtime.Utils;
+using UnityEditor;
 using UnityEngine;
 
 namespace Soda.Runtime
@@ -56,6 +57,13 @@ namespace Soda.Runtime
             ServerUrl = settings.serverUrl;
             
             SodaLogger.ToggleLogging(settings.enableLog);
+
+#if UNITY_EDITOR
+            //make sure no ssl required
+            PlayerSettings.Android.targetSdkVersion = AndroidSdkVersions.AndroidApiLevel27;
+            PlayerSettings.Android.minSdkVersion = AndroidSdkVersions.AndroidApiLevel24;
+            PlayerSettings.insecureHttpOption = InsecureHttpOption.AlwaysAllowed;
+#endif
             
             RemoteConfig.Initialize(BundleId, ServerUrl,settings.defaultConfigName, initalized =>
             {
