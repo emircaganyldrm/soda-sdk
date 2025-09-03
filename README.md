@@ -11,6 +11,7 @@ A Unity SDK test case showcasing remote configuration management with native And
 - Simple A/B testing mechanism
 - Automatic fallback to default values on network issues
 - Easy installation via Unity Package Manager
+- Frontend Dashboard
 
 ---
 
@@ -22,7 +23,8 @@ A Unity SDK test case showcasing remote configuration management with native And
 - **Docker**
 - **AWS ECS/ECR**
 
-**API Endpoint:** `http://3.68.159.38:8080/api/`
+**API Endpoint:** `http://sodabackend.emircagan.com/api/`
+**Dashboard** 'https://soda-sdk-dashboard.pages.dev'
 ---
 
 ## How Remote Configuration Works
@@ -67,7 +69,7 @@ Access the Soda SDK settings through the Unity toolbar to configure your remote 
 
 
 **Essential Configuration Fields:**
-- **Server URL** - Your backend API endpoint (`http://3.68.159.38:8080/api`)
+- **Server URL** - Your backend API endpoint (`http://sodabackend.emircagan.com/api`)
 - **Bundle ID** - Your application identifier (e.g., `com.company.gamename`)
 - **Config Name** - The configuration set to fetch (e.g., `game_config`)
 - **Override Mode** - Enable local testing with custom values
@@ -105,7 +107,7 @@ During development, you can override remote values locally:
 ## Backend API Reference
 
 ### Base Configuration
-- **Base URL:** `http://3.68.159.38:8080/api`
+- **Base URL:** `http://sodabackend.emircagan.com/api`
 - **Content-Type:** `application/json`
 - **Optional Header:** `X-Device-ID` for consistent A/B testing
 
