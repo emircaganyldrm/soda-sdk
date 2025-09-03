@@ -24,7 +24,8 @@ A Unity SDK test case showcasing remote configuration management with native And
 - **AWS ECS/ECR**
 
 **API Endpoint:** `http://sodabackend.emircagan.com/api/`
-**Dashboard** 'https://soda-sdk-dashboard.pages.dev'
+---
+**Dashboard** https://soda-sdk-dashboard.pages.dev
 ---
 
 ## How Remote Configuration Works
